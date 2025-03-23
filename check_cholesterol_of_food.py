@@ -99,4 +99,16 @@ for i in range(len(food_list)):
 #The cholesterol content of egg is 212 mg for every portion of 1.
 
 
+#I have written a function to calculate the sum of cholesterol content of multiple food items.
+#but I'm too lazy to write an input function for multiple food items.
+
+def sum_cholesterol(food_items):
+	cholesterol_sum=0
+	for food in food_items:
+		for i in range(len(food_list)):
+			if food_list[i]==food:
+				cholesterol_sum+=cholesterol_content[i][2]
+				break
+	return cholesterol_sum
+
 

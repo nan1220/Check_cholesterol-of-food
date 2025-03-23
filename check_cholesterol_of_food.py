@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 url='https://www.ucsfhealth.org/education/cholesterol-content-of-foods'
 response = requests.get(url)
-doc=BeuutifulSoup(response.text, 'html.parser')
+doc=BeautifulSoup(response.text, 'html.parser')
 #doc=BeautifulSoup(response.content, 'html.parser')
 #Ig,this works as well.
 
@@ -11,11 +11,11 @@ tables=doc.select('table')
 
 parsed_table=[]
 for table in tables:
-    for row in table.select('tr')[1:]:
-        buffer_row=[]
-        for data in row.select('td'):
-            buffer_row.append(data.get_text())
-        parsed_table.append(buffer_row)
+	for row in table.select('tr')[1:]:
+		buffer_row=[]
+		for data in row.select('td'):
+			buffer_row.append(data.get_text())
+		parsed_table.append(buffer_row)
 #output is a list of lists
 # [['Milk (non-fat)', '1 cup', '4', '0', '0'],
 #  ['Milk (low-fat)', '1 cup', '10', '3', '2'],
@@ -63,9 +63,9 @@ for table in tables:
 
 cholesterol_content=[]
 for sub_full_list in parsed_table:
-    sub_select_list=sub_full_list[0:2]
-    sub_select_list.append(int(sub_full_list[2]))
-    cholesterol_content.append(sub_select_list)
+	sub_select_list=sub_full_list[0:2]
+	sub_select_list.append(int(sub_full_list[2]))
+	cholesterol_content.append(sub_select_list)
 #output is a list of 32 lists
 # [['Milk (non-fat)', '1 cup', 4],
 #  ['Milk (low-fat)', '1 cup', 10],
@@ -81,20 +81,20 @@ cholesterol_content[9]
 
 food_list=[]
 for sub_list in cholesterol_content:
-    food_list.append(sub_list[0])
+	food_list.append(sub_list[0])
 #output is a list of 32 food items
 print(
-    'Here is the food list you can check:\n',
-      food_list)
+	'Here is the food list you can check:\n',
+	  food_list)
 #['Milk (non-fat)', 'Milk (low-fat)', 'Milk (whole)', 'Yogurt (non-fat)', 'Yogurt (whole)', 'Cheddar cheese', 'Cottage cheese (low-fat)', 'Butter', 'Margarine', 'Vegetable oils', 'Tofu', 'Pinto beans', 'Egg', 'Halibut', 'Salmon', 'Oysters', 'Crab', 'Lobster', 'Tuna (in water)', 'Shrimp', 'Squid', 'Beef (ground, lean)', 'Beef (short ribs)', 'Beef (sirloin)', 'Beef liver', 'Veal (top round)', 'Lamb (foreshank)', 'Ham', 'Pork (tenderloin)', 'Pork (chop)', 'Chicken liver', 'Chicken (no skin)']
 
 food=input('Enter the food name: ')
 for i in range(len(food_list)):
-    if food_list[i]==food:
-         print(f'The cholesterol content of {food.lower} is {cholesterol_content[i][2]} mg for every portion of {cholesterol_content[i][1]}.')
-        break
-    elif i==len(food_list)-1:
-        print('Food not found.')
+	if food_list[i]==food:
+		print(f'The cholesterol content of {food.lower} is {cholesterol_content[i][2]} mg for every portion of {cholesterol_content[i][1]}.')
+		break
+	elif i==len(food_list)-1:
+		 print('Food not found.')
 #Enter the food name: Egg
 #The cholesterol content of egg is 212 mg for every portion of 1.
 
